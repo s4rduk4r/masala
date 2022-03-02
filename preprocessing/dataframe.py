@@ -19,7 +19,7 @@ def open_dataset(uri_local : str, uri_remote : str, tsv : bool = False) -> pd.Da
     return df
 
 # Пропуски
-def na_counts_and_props(df : pd.DataFrame) -> pd.DataFrame:
+def na_counts_and_props(df : pd.DataFrame, sort_by_props : bool = True) -> pd.DataFrame:
     """Посчитать и показать количество пропусков и их долю в наборе данных
 
     Args:
@@ -29,8 +29,11 @@ def na_counts_and_props(df : pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: датафрейм с колонками na_counts, содержащим количество пропусков;
         na_props - доля пропусков в общей выборке
     """
-    return pd.DataFrame(
+    result = pd.DataFrame(
         data = {"na_counts" : df.isna().sum()[df.isna().sum() > 0], 
                 "na_props" : df.isna().mean()[df.isna().sum() > 0]}
-    ).style.format({"na_props": "{:.3%}"})
+    )
+    if sort_by_props:
+        result = result.sort_values(by = "na_props")
+    return result.style.format({"na_props": "{:.3%}"})
     
