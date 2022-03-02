@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Открыть CSV или TSV файл, который может находиться локально или на сервере
-def open_dataset(uri_local : string, uri_remote : string, tsv : bool = False) -> pd.DataFrame:
+def open_dataset(uri_local : str, uri_remote : str, tsv : bool = False) -> pd.DataFrame:
     """Попытка открыть файл локально или в контейнере
 
     Args:
