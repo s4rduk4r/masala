@@ -39,9 +39,9 @@ def na_counts_and_props(df : pd.DataFrame, sort_by_props : bool = True, backgrou
     if sort_by_props:
         result = result.sort_values(by = "na_props")
     
-    result.style.format({"na_props": "{:.3%}"})
+    result = result.style.format({"na_props": "{:.3%}"})
     
     if background_gradient:
-        result = result.style.background_gradient()
+        result = result.background_gradient()
     return result
     
