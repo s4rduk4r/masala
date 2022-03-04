@@ -19,11 +19,13 @@ def open_dataset(uri_local : str, uri_remote : str, tsv : bool = False) -> pd.Da
     return df
 
 # Пропуски
-def na_counts_and_props(df : pd.DataFrame, sort_by_props : bool = True) -> pd.DataFrame:
+def na_counts_and_props(df : pd.DataFrame, sort_by_props : bool = True, background_gradient : bool = True) -> pd.DataFrame:
     """Посчитать и показать количество пропусков и их долю в наборе данных
 
     Args:
         df (pd.DataFrame): исходный набор данных
+        sort_by_props (bool) : сортировать вывод по возрастанию
+        background_gradient (bool) : залить выходные значения градиентом
 
     Returns:
         pd.DataFrame: датафрейм с колонками na_counts, содержащим количество пропусков;
@@ -33,7 +35,13 @@ def na_counts_and_props(df : pd.DataFrame, sort_by_props : bool = True) -> pd.Da
         data = {"na_counts" : df.isna().sum()[df.isna().sum() > 0], 
                 "na_props" : df.isna().mean()[df.isna().sum() > 0]}
     )
+    
     if sort_by_props:
         result = result.sort_values(by = "na_props")
-    return result.style.format({"na_props": "{:.3%}"})
+    
+    result.style.format({"na_props": "{:.3%}"})
+    
+    if background_gradient:
+        result = result.style.background_gradient()
+    return result
     
