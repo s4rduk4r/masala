@@ -59,8 +59,8 @@ def outliers_rm_by_carling(s : pd.Series) -> pd.Series:
     n = s_ranked.shape[0]
     h = n / 4 + 5 / 12
     j = round(np.floor(h)) - 1
-    i = n - j
-    h = h - j + 1
+    i = n - j - 1
+    h = h - j - 1
     k = (17.63 * n - 23.64) / (7.74 * n - 3.71)
     # Оценки квартилей и межквартильного расстояния
     q1 = (1 - h) * s_ranked[j] + h * s_ranked[j + 1]
