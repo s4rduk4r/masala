@@ -27,7 +27,7 @@ def outliers_rm_by_sample_iqr(s: pd.Series) -> pd.Series:
 
 # Метод исключения выбросов по Карлингу
 def outliers_rm_by_carling(s : pd.Series) -> pd.Series:
-    """Метод исключения выбросов по Карлингу [1].
+    """Метод исключения выбросов по [Карлингу [1]](https://www.researchgate.net/profile/Kenneth-Carling/publication/4894204_Resistant_outlier_rules_and_the_non-Gaussian_case/links/59eafa2b0f7e9bfdeb6ce138/Resistant-outlier-rules-and-the-non-Gaussian-case.pdf).
     
     Наблюдаемое является выбросом, если находится вне интервала [M - k * (q3 - q1); M + k * (q3 - q1)]
     
@@ -48,7 +48,8 @@ def outliers_rm_by_carling(s : pd.Series) -> pd.Series:
         False = выброс
         
     References:
-        1. https://www.researchgate.net/profile/Kenneth-Carling/publication/4894204_Resistant_outlier_rules_and_the_non-Gaussian_case/links/59eafa2b0f7e9bfdeb6ce138/Resistant-outlier-rules-and-the-non-Gaussian-case.pdf
+    
+        1. Carling K. Resistant outlier rules and the non-Gaussian case. Computational Statistics & Data Analysis. (2000). 33(3). pp.249-258.
     """
     # Ранжируем данные
     s = s.sort_values().reset_index(name = "value")
