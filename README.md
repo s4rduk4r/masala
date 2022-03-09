@@ -1,6 +1,6 @@
 # Masala
 
-[masala_logo](https://upload.wikimedia.org/wikipedia/commons/8/88/Contents_of_a_bag_of_chai_tea.jpg)
+![masala_logo](https://upload.wikimedia.org/wikipedia/commons/8/88/Contents_of_a_bag_of_chai_tea.jpg =329x225)
 
 Little snippets for Jupyter Lab/Jupyter Notebook environments.
 
