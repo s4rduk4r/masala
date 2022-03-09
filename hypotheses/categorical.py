@@ -91,11 +91,8 @@ def prop_conf_int(df : pd.DataFrame, column_success : pd.Index, column_failures 
   
   ## Returns:
   
-    contingency_table : pandas.DataFrame
-    Same as input argument
-    
-  Prints pandas.DataFrame with matrix of p-values between the comparison groups.
-  Cells holding p-values <= alpha are highlighted in a different color
+    pandas.DataFrame with proportions and confidence intervals of a sample
+
   """
     # Proportion
     n = df[column_success] + df[column_failures]
