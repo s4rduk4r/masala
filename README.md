@@ -1,7 +1,5 @@
 # Masala
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Contents_of_a_bag_of_chai_tea.jpg" width="329" height="225">
-
 Little snippets for Jupyter Lab/Jupyter Notebook environments.
 
 Intend is to automate some of the routine actions with pandas, numpy, scipy, matplotlib
