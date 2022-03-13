@@ -6,6 +6,7 @@ import masala.asserts
 import masala.pretty_msg
 
 assert_step = masala.asserts.assert_step
+assert_step2 = masala.asserts.assert_step2
 print_error = masala.pretty_msg.print_error
 print_msg = masala.pretty_msg.print_msg
 print_warn = masala.pretty_msg.print_warn
