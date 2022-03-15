@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import chi2_contingency
 from scipy.stats import fisher_exact
 
-from pretty_msg import print_msg, print_warn
+from masala.pretty_msg import print_msg, print_warn
 
 def pairwise_fisher(contingency_table : pd.DataFrame, alpha : float = 0.05) -> pd.DataFrame:
     """
@@ -94,14 +94,14 @@ def prop_conf_int(df : pd.DataFrame, column_success : pd.Index, column_failures 
     pandas.DataFrame with proportions and confidence intervals of a sample
 
   """
-    # Proportion
-    n = df[column_success] + df[column_failures]
-    prop = df[column_success] / n
-    # 95%-confidence interval
-    sp = prop * (1 - prop) / n
-    sp = sp.apply(lambda x: 1.96 * np.sqrt(x))
-    ci_lwr = prop - sp
-    ci_upr = prop + sp
-    return pd.DataFrame(
-        data = {"prop" : prop, "ci_lwr" : ci_lwr, "ci_upr" : ci_upr}
-    )
+  # Proportion
+  n = df[column_success] + df[column_failures]
+  prop = df[column_success] / n
+  # 95%-confidence interval
+  sp = prop * (1 - prop) / n
+  sp = sp.apply(lambda x: 1.96 * np.sqrt(x))
+  ci_lwr = prop - sp
+  ci_upr = prop + sp
+  return pd.DataFrame(
+      data = {"prop" : prop, "ci_lwr" : ci_lwr, "ci_upr" : ci_upr}
+  )
