@@ -1,1 +1,1 @@
-__all__ = ["categorical"]
+__all__ = ["categorical", "numeric"]
