@@ -1,3 +1,6 @@
+import pandas as pd
+import numpy as np
+
 def cohen_d(x1 : pd.Series, x2 : pd.Series):
     """Effect size by Cohen's d
 
