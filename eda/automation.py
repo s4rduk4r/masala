@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from masala.pretty_msg import print_msg
 from masala.eda.histogram import plot_hist
 from masala.eda.normality import normality_test
+from masala.eda.outliers import outliers_rm_by_carling
 
 """
 Алгоритм EDA
@@ -40,7 +41,7 @@ def make_eda(s : pd.Series, title : str, xlabel : str, ylabel : str, scale_x : f
     s.plot.box()
     plt.show()
     
-    display(s[~outliers.outliers_rm_by_carling(s)].agg([min, max, "count"]))
+    display(s[~outliers_rm_by_carling(s)].agg([min, max, "count"]))
     
     print()
     print_msg("Clean data histogram")
@@ -48,7 +49,7 @@ def make_eda(s : pd.Series, title : str, xlabel : str, ylabel : str, scale_x : f
     
     print()
     print_msg("Normality check of clean data")
-    s_clean = s[outliers.outliers_rm_by_carling(s)]
+    s_clean = s[outliers_rm_by_carling(s)]
     normality_test(s_clean, verbose=True)
     
     print()
