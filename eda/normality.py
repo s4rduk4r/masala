@@ -4,20 +4,19 @@ from masala.pretty_msg import print_msg, print_warn
 
 # Обёртка над тестом на нормальность по д'Агостино-Пирсону
 def normality_test(s : pd.Series, alpha : float = 0.05, method : str = None, verbose : bool = False) -> tuple:
-    """Тест на нормальность
+    """Normality test
     
-    По-умолчанию автоматически выбирает метод Шапиро-Уилка (n <= 5000) или д'Агостино-Пирсона (n > 5000), 
-    в зависимости от размера выборки (n).
+    Chooses between Shapiro-Wilk by default (n <= 5000) or d'Agostino-Pearson (n > 5000) based on a sample size
 
     Args:
-        s (pd.Series): Случайная величина с типом pandas.Series
-        alpha (float, optional): Уровень значимости. Defaults to 0.05.
-        method (str, optional): Метод для проверки на нормальность. По-умолчанию None.
-                None - выбрать метод автоматически
-                d_agostino-pearson - принудительно использовать метод д'Агостино-Пирсона
-                shapiro-wilk - принудительно использовать метод Шапиро-Уилка
+        s (pd.Series): Sample
+        alpha (float, optional): Significance level. Defaults to 0.05.
+        method (str, optional): Normality test method. Defaults to None.
+                None - choose method based on a sample size
+                d_agostino-pearson - force use of d'Agostino-Pearson method
+                shapiro-wilk - force use of Shapiro-Wilk method
         
-        verbose (bool): Вывод результата сравнения p-значения с уровнем значимости alpha
+        verbose (bool): Print interpretation of a test result based on comparison of p-value and alpha
 
     Returns:
         statistic, p_value - значение статистики метода и p-значение
