@@ -38,7 +38,7 @@ def normality_test(s : pd.Series, alpha : float = 0.05, method : str = None, ver
     # Вывод интерпретации на экран
     if verbose:
         if p_value > alpha:
-            print_msg("Нормальное распределение")
+            print_msg("Normal distribution")
         else:
-            print_warn("Отличное от нормального распределение")
+            print_warn("Non-normal distribution")
     return (s_value, p_value)
