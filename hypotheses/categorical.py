@@ -1,5 +1,7 @@
+from ast import alias
 import pandas as pd
 import numpy as np
+import scipy.stats as stats
 from scipy.stats import chi2_contingency
 from scipy.stats import fisher_exact
 
@@ -105,3 +107,18 @@ def prop_conf_int(df : pd.DataFrame, column_success : pd.Index, column_failures 
   return pd.DataFrame(
       data = {"prop" : prop, "ci_lwr" : ci_lwr, "ci_upr" : ci_upr}
   )
+
+def proportion_conf_intervals(k : int, n : int, alpha : float = 0.95):
+  """Proportion and it's confidence interval at a given significance level
+
+  Args:
+      k (int): Number of successes
+      n (int): Number of trials
+      alpha (float, optional): Significance level for the confidence interval. Defaults to 0.95.
+
+  Returns:
+      pd.DataFrame: _description_
+  """
+  prop = k / n
+  ci_lwr, ci_upr = stats.binom.interval(alpha=alpha, n = n, p = prop) / n
+  return (prop, ci_lwr, ci_upr)
