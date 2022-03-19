@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from masala.pretty_msg import print_msg
-from masala.eda.histogram import plot_hist
+from masala.eda.histogram import bins_by_rice
 from masala.eda.normality import normality_test
 from masala.eda.outliers import outliers_rm_by_carling
 
@@ -33,23 +33,43 @@ def make_eda(s : pd.Series, title : str, xlabel : str, ylabel : str, scale_x : f
         scale_x (float): X-axis ticks factor
         scale_y (float): Y-axis ticks factor
     """
-    print_msg("Raw data")
-    plot_hist(s, title, xlabel, ylabel, scale_x, scale_y)
-        
+    s_clean = s[outliers_rm_by_carling(s)]
+    
+    # Plot graphs
+    fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(12, 4))
+    
+    ax[0].hist(x = s, bins = bins_by_rice(s.shape[0]))
+    ax[0].set_title("Raw data")
+    ax[0].set_xlabel(xlabel)
+    ax[0].set_ylabel(ylabel)
+    
+    ax[1].boxplot(s)
+    
+    ax[2].hist(x = s_clean, bins = bins_by_rice(s_clean.shape[0]))
+    ax[2].set_title("Clean data histogram")
+    ax[2].set_xlabel(xlabel)
+    ax[2].set_ylabel(ylabel)
+    
+    # Adjust scales
+    if scale_x > 1:
+        ax[0].set_xticklabels(["{:.1f}".format(x / scale_x) for x in plt.gca().get_xticks()])
+        ax[2].set_xticklabels(["{:.1f}".format(x / scale_x) for x in plt.gca().get_xticks()])
+    if scale_y > 1:
+        ax[0].set_yticklabels(["{:.1f}".format(y / scale_y) for y in plt.gca().get_yticks()])
+        ax[2].set_yticklabels(["{:.1f}".format(y / scale_y) for y in plt.gca().get_yticks()])
+    
+    fig.suptitle(title)
+    fig.tight_layout()
+    
+    plt.show()
+    
     print()
     print_msg("Outliers statistics")
-    s.plot.box()
-    plt.show()
     
     display(s[~outliers_rm_by_carling(s)].agg([min, max, "count"]))
     
-    print()
-    print_msg("Clean data histogram")
-    plot_hist(s, title, xlabel, ylabel, scale_x, scale_y, rm_outliers=True)
-    
-    print()
     print_msg("Normality check of clean data")
-    s_clean = s[outliers_rm_by_carling(s)]
+    
     normality_test(s_clean, verbose=True)
     
     print()
